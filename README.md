@@ -1,4 +1,4 @@
-# CLO835 Final Project: Flask App on EKS
+# EKS: Flask App with Stateful Sets
 
 This repository contains the code and Kubernetes manifests for deploying a Flask-based web application on Amazon EKS. The application retrieves a background image from a private S3 bucket and displays it on the homepage. The image URL and other configuration values are stored in a ConfigMap.
 
