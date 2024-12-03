@@ -14,7 +14,7 @@ DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT"))
 BACKGROUND_IMAGE = os.environ.get("BACKGROUND_IMAGE") or "Invalid Image been passed"
-GROUP_NAME = os.environ.get('GROUP_NAME') or "GROUP4"
+GROUP_NAME = os.environ.get('GROUP_NAME') or "GROUP11"
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
