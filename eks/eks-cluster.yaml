@@ -1,18 +1,24 @@
+---
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
   name: clo835-cluster
-  region: us-west-2
-nodeGroups:
-  - name: worker-nodes
-    instanceType: t3.medium
+  region: "us-east-1"
+  version: "1.29"
+
+availabilityZones: ["us-east-1a" ,"us-east-1b" ,"us-east-1c"]
+iam:
+  serviceRoleARN: arn:aws:iam::681863550751:role/LabRole
+managedNodeGroups:
+- name: nodegroup
+    instanceType: t3.small
     desiredCapacity: 2
     volumeSize: 20
     ssh:
-      allow: true
+      enableSsm: true
     iam:
-      withAddonPolicies:
-        imageBuilder: true
+      instanceRoleARN: arn:aws:iam::681863550751:role/LabRole      withAddonPolicies:
+      imageBuilder: true
     kubeconfig:
       name: clo835-cluster
   namespaces:
