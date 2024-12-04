@@ -10,5 +10,5 @@ spec:
     version: 1.0.0
   values:
     git:
-      url: "git@github.com:your-username/your-repository.git"
+      url: "git@github.com:deveshgupta7/EKS_StatefulApplication.git"
       branch: main
