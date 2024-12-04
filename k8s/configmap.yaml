@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  background_image_url: "https://s3.amazonaws.com/your-bucket-name/background-image.jpg"
-  app_name: "Your Name"
+  background_image_url: "https://eks-pr-bucket.s3.us-east-1.amazonaws.com/Kubernetes.jpeg"
+  app_name: "flask-app"

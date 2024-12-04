@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mysql-db
-          image: mysql:8.0
+          image: 681863550751.dkr.ecr.us-east-1.amazonaws.com/docker-containers:mysql-app-latest
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
