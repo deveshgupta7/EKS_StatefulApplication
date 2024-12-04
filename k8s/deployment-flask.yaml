@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: your-ecr-repo-url/flask-app:latest
+          image: 681863550751.dkr.ecr.us-east-1.amazonaws.com/docker-containers:flask-app-latest
           ports:
             - containerPort: 81
           env:
