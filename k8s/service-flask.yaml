@@ -2,11 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: flask-service
+  namespace: final  # Ensure the service is in the correct namespace
 spec:
   selector:
-    app: flask-app
+    app: flask-app  # Ensure this matches the label in your deployment pods
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 81
-  type: LoadBalancer
+      port: 80  # External port exposed by the service
+      targetPort: 81  # Port your application listens on in the container
+  type: LoadBalancer  # Expose the service with an external load balancer

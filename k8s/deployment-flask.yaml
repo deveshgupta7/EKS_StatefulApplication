@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flask-app
+  namespace: final  # Add the namespace here
 spec:
   replicas: 1
   selector:
@@ -15,22 +16,23 @@ spec:
       containers:
         - name: flask-app
           image: 681863550751.dkr.ecr.us-east-1.amazonaws.com/docker-containers:flask-app-latest
+          imagePullPolicy: Always  # Ensures image is always pulled from the repository
           ports:
-            - containerPort: 81
+            - containerPort: 81  # Ensure the app is listening on port 81
           env:
             - name: DBHOST
-              value: "mysql-service"
+              value: "mysql-service"  # Ensure this matches your MySQL service name
             - name: DBUSER
-              value: "root"
+              value: "root"  # Database username
             - name: DBPWD
               valueFrom:
                 secretKeyRef:
-                  name: db-secret
-                  key: password
+                  name: db-secret  # Ensure this secret exists in the same namespace
+                  key: password    # The key inside the secret
             - name: DATABASE
-              value: "employees"
+              value: "employees"  # Database name
             - name: BACKGROUND_IMAGE_URL
               valueFrom:
                 configMapKeyRef:
-                  name: app-config
-                  key: background_image_url
+                  name: app-config  # Ensure this config map exists in the same namespace
+                  key: background_image_url  # The key inside the config map

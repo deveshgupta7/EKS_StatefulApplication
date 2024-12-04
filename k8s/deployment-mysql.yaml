@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-db
+  namespace: final  # Add the namespace here
 spec:
   replicas: 1
   selector:
@@ -19,7 +20,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-secret
+                  name: db-secret  # Ensure the db-secret exists in the same namespace
                   key: password
             - name: MYSQL_DATABASE
               value: "employees"
@@ -31,4 +32,4 @@ spec:
       volumes:
         - name: mysql-data
           persistentVolumeClaim:
-            claimName: mysql-pvc
+            claimName: mysql-pvc  # Ensure the PVC exists in the same namespace
