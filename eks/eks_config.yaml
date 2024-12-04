@@ -6,7 +6,7 @@ metadata:
   region: "us-east-1"
   version: "1.29"
 
-availabilityZones: ["us-east-1a" ,"us-east-1b" ,"us-east-1c"]
+availabilityZones: ["us-east-1a" ,"us-east-1b"]
 iam:
   serviceRoleARN: arn:aws:iam::681863550751:role/LabRole
 managedNodeGroups:
@@ -17,12 +17,12 @@ managedNodeGroups:
     ssh:
       enableSsm: true
     iam:
-      instanceRoleARN: arn:aws:iam::681863550751:role/LabRole      withAddonPolicies:
-      imageBuilder: true
+      instanceRoleARN: arn:aws:iam::681863550751:role/LabRole      
+      withAddonPolicies:
+        imageBuilder: true
     kubeconfig:
       name: clo835-cluster
   namespaces:
     - final
-
-# To create the cluster with eksctl, you would run:
-# eksctl create cluster -f eks/eks-cluster.yaml
+    
+# eksctl create cluster -f eks/eks_config.yaml
