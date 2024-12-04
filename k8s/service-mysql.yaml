@@ -2,11 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mysql-service
+  namespace: final  # Ensure the service is in the correct namespace
 spec:
   selector:
-    app: mysql-db
+    app: mysql-db  # Ensure this matches the label on the mysql-db pods
   ports:
     - protocol: TCP
-      port: 3306
-      targetPort: 3306
-  clusterIP: None  # Headless service for direct access
+      port: 3306  # The port exposed by the service
+      targetPort: 3306  # The port the container is listening on
+  clusterIP: None  # Headless service for direct access to pods
