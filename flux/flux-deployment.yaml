@@ -19,4 +19,4 @@ spec:
           command:
             - "/flux"
             - "--memcached-service=flux-memcached"
-            - "--git-url=git@github.com:your-username/your-repository.git"
+            - "--git-url=git@github.com:deveshgupta7/EKS_StatefulApplication.git"
