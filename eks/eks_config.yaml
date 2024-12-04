@@ -6,18 +6,18 @@ metadata:
   region: "us-east-1"
   version: "1.29"
 
-availabilityZones: ["us-east-1a" ,"us-east-1b"]
+availabilityZones: ["us-east-1a", "us-east-1b"]
 iam:
   serviceRoleARN: arn:aws:iam::681863550751:role/LabRole
 managedNodeGroups:
-- name: nodegroup
+  - name: nodegroup
     instanceType: t3.small
     desiredCapacity: 2
     volumeSize: 20
     ssh:
       enableSsm: true
     iam:
-      instanceRoleARN: arn:aws:iam::681863550751:role/LabRole      
+      instanceRoleARN: arn:aws:iam::681863550751:role/LabRole
       withAddonPolicies:
         imageBuilder: true
     kubeconfig:
