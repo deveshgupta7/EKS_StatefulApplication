@@ -4,4 +4,4 @@ metadata:
   name: app-config
 data:
   background_image_url: "https://eks-pr-bucket.s3.us-east-1.amazonaws.com/Kubernetes.jpeg"
-  app_name: "Flask App"
+  app_name: "flask-app"
