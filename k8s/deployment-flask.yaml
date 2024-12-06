@@ -21,7 +21,7 @@ spec:
             - containerPort: 81  # Ensure the app is listening on port 81
           env:
             - name: DBHOST
-              value: "mysql-service"  # Ensure this matches your MySQL service name
+              value: "mysql-service"  # MySQL service host
             - name: DBUSER
               value: "root"  # Database username
             - name: DBPWD
@@ -31,8 +31,34 @@ spec:
                   key: password    # The key inside the secret
             - name: DATABASE
               value: "employees"  # Database name
-            - name: BACKGROUND_IMAGE_URL
+            - name: DBPORT
+              value: "3306"  # Database port
+            - name: BACKGROUND_IMAGE
+              value: "https://eks-pr-bucket.s3.us-east-1.amazonaws.com/Kubernetes.jpeg"  # URL to background image
+            - name: GROUP_NAME
+              value: "GROUP11"  # Group name
+            - name: AWS_ACCESS_KEY_ID
               valueFrom:
-                configMapKeyRef:
-                  name: app-config  # Ensure this config map exists in the same namespace
-                  key: background_image_url  # The key inside the config map
+                secretKeyRef:
+                  name: aws-secret  # Secret name for AWS credentials
+                  key: AWS_ACCESS_KEY_ID  # Key for AWS Access Key ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret  # Secret name for AWS credentials
+                  key: AWS_SECRET_ACCESS_KEY  # Key for AWS Secret Access Key
+            - name: AWS_SESSION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret  # Secret name for AWS credentials
+                  key: AWS_SESSION_TOKEN  # Key for AWS Session Token
+            - name: APP_COLOR
+              value: "lime"  # App color
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+

@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 DBHOST = os.environ.get("DBHOST") or "localhost"
 DBUSER = os.environ.get("DBUSER") or "root"
-DBPWD = os.environ.get("DBPWD") or "passwors"
+DBPWD = os.environ.get("DBPWD") or "password"
 DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT"))
@@ -48,7 +48,7 @@ COLOR = random.choice(["red", "green", "blue", "blue2", "darkblue", "pink", "lim
 @app.route("/", methods=['GET', 'POST'])
 def home():
     print('show me the background image url',BACKGROUND_IMAGE)
-    image_url = url_for('static', filename='background_image.png')
+    image_url = url_for('static', filename='Kubernetes.jpeg')
     return render_template('addemp.html', background_image = image_url, group_name = GROUP_NAME)
 @app.route("/download", methods=['GET','POST'])
   #https://privatebucketclo835.s3.amazonaws.com/minionparty.png
@@ -56,14 +56,14 @@ def download(image_url):
    try:
          bucket = image_url.split('//')[1].split('.')[0]
          object_name = '/'.join(image_url.split('//')[1].split('/')[1:])
-         print(bucket)  # prints 'privatebucketclo835'
-         print(object_name)  # prints 'minionparty.png'
+         print(bucket)  
+         print(object_name) 
          print("Background Image Location --->" + image_url) # Added for Logging of Background Image Path
          s3 = boto3.resource('s3')
          output_dir = "static"
          if not os.path.exists(output_dir):
                  os.makedirs(output_dir)
-         output = os.path.join(output_dir, "background_image.png")
+         output = os.path.join(output_dir, "Kubernetes.jpeg")
          s3.Bucket(bucket).download_file(object_name, output)
 
          return output
@@ -80,12 +80,12 @@ def download(image_url):
 
 @app.route("/about", methods=['GET','POST'])
 def about():
-    image_url = url_for('static', filename='background_image.png')
+    image_url = url_for('static', filename='Kubernetes.jpeg')
     return render_template('about.html', background_image = image_url, group_name = GROUP_NAME)
     
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
-    image_url = url_for('static', filename='background_image.png')
+    image_url = url_for('static', filename='Kubernetes.jpeg')
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
@@ -110,7 +110,7 @@ def AddEmp():
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
-    image_url = url_for('static', filename='background_image.png')
+    image_url = url_for('static', filename='Kubernetes.jpeg')
     return render_template("getemp.html", background_image = image_url, group_name = GROUP_NAME)
 
 
