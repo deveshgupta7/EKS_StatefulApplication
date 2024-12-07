@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: app-config
-  namespace: final  # Add the namespace here
+  namespace: final 
 data:
   background_image_url: "https://eks-pr-bucket.s3.us-east-1.amazonaws.com/Kubernetes.jpeg"
   app_name: "flask-app"
