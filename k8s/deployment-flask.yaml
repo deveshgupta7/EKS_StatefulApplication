@@ -16,9 +16,9 @@ spec:
       containers:
         - name: flask-app
           image: 681863550751.dkr.ecr.us-east-1.amazonaws.com/docker-containers:flask-app-latest
-          imagePullPolicy: Always  # Ensures image is always pulled from the repository
+          imagePullPolicy: Always  
           ports:
-            - containerPort: 81  # Ensure the app is listening on port 81
+            - containerPort: 81  
           env:
             - name: DBHOST
               value: "mysql-service"  
