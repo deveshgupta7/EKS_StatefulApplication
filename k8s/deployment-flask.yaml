@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flask-app
-  namespace: final  # Add the namespace here
+  namespace: final 
 spec:
   replicas: 1
   selector:
@@ -21,39 +21,39 @@ spec:
             - containerPort: 81  # Ensure the app is listening on port 81
           env:
             - name: DBHOST
-              value: "mysql-service"  # MySQL service host
+              value: "mysql-service"  
             - name: DBUSER
-              value: "root"  # Database username
+              value: "root"  
             - name: DBPWD
               valueFrom:
                 secretKeyRef:
-                  name: db-secret  # Ensure this secret exists in the same namespace
-                  key: password    # The key inside the secret
+                  name: db-secret  
+                  key: password    
             - name: DATABASE
-              value: "employees"  # Database name
+              value: "employees"  
             - name: DBPORT
-              value: "3306"  # Database port
+              value: "3306"  
             - name: BACKGROUND_IMAGE
-              value: "https://eks-pr-bucket.s3.us-east-1.amazonaws.com/Kubernetes.jpeg"  # URL to background image
+              value: "https://eks-pr-bucket.s3.us-east-1.amazonaws.com/Kubernetes.jpeg"  
             - name: GROUP_NAME
-              value: "GROUP11"  # Group name
+              value: "GROUP11"  
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
-                  name: aws-secret  # Secret name for AWS credentials
-                  key: AWS_ACCESS_KEY_ID  # Key for AWS Access Key ID
+                  name: aws-secret  
+                  key: AWS_ACCESS_KEY_ID  
             - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                  name: aws-secret  # Secret name for AWS credentials
-                  key: AWS_SECRET_ACCESS_KEY  # Key for AWS Secret Access Key
+                  name: aws-secret  
+                  key: AWS_SECRET_ACCESS_KEY  
             - name: AWS_SESSION_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: aws-secret  # Secret name for AWS credentials
-                  key: AWS_SESSION_TOKEN  # Key for AWS Session Token
+                  name: aws-secret  
+                  key: AWS_SESSION_TOKEN  
             - name: APP_COLOR
-              value: "lime"  # App color
+              value: "lime"  
           resources:
             requests:
               memory: "512Mi"
