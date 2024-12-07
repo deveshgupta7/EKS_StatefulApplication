@@ -5,8 +5,8 @@ metadata:
   namespace: final  # Ensure it’s in the correct namespace
 spec:
   accessModes:
-    - ReadWriteOnce  # The volume can be mounted as read-write by a single node
+    - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi  # Requested storage size
-  storageClassName: gp2  # Specify the storage class directly in the spec
+      storage: 2Gi
+  storageClassName: aws-ebs-csi

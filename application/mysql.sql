@@ -9,7 +9,7 @@ primary_skill VARCHAR(20),
 location VARCHAR(20));
 
 INSERT INTO employee VALUES ('1','Devesh','Gupta','Laugh','Orignal');
-INSERT INTO employee VALUES ('1','Varun','Pal','Empathy','alien');
+INSERT INTO employee VALUES ('2','Varun','Pal','Empathy','alien');
 SELECT * FROM employee;
 
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;

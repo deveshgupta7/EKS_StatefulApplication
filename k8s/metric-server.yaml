@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-server
+  namespace: kube-system
+  labels:
+    k8s-app: metrics-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: metrics-server
+  template:
+    metadata:
+      labels:
+        k8s-app: metrics-server
+    spec:
+      containers:
+        - name: metrics-server
+          image: k8s.gcr.io/metrics-server/metrics-server:v0.6.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 443
+          args:
+            - "--kubelet-insecure-tls"  # Allow insecure TLS communication with Kubelets
+            - "--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname"
+            - "--kubelet-port=10250"
+          volumeMounts:
+            - mountPath: /etc/ssl/certs
+              name: ssl-certs
+              readOnly: true
+      volumes:
+        - name: ssl-certs
+          hostPath:
+            path: /etc/ssl/certs
+            type: Directory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: metrics-server
+  namespace: kube-system
+  labels:
+    k8s-app: metrics-server
+spec:
+  ports:
+    - port: 443
+      targetPort: 443
+  selector:
+    k8s-app: metrics-server
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: metrics-server  # Ensure this is specified
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "nodes", "nodes/proxy", "services"]
+    verbs: ["get", "list"]
+  - apiGroups: [""]
+    resources: ["pods/metrics", "nodes/metrics"]
+    verbs: ["get", "list"]
+  - nonResourceURLs: ["/metrics"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: metrics-server
+  namespace: kube-system
+subjects:
+  - kind: ServiceAccount
+    name: metrics-server
+    namespace: kube-system
+roleRef:
+  kind: ClusterRole
+  name: metrics-server
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: metrics-server
+  namespace: kube-system
